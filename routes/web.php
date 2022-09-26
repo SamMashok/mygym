@@ -21,6 +21,4 @@ Route::get('/register', function () {
     return "<h1>My Register Page</h1>";
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+Route::view('/login', 'auth.login');
