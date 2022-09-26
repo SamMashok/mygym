@@ -22,5 +22,5 @@ Route::get('/register', function () {
 });
 
 Route::get('/login', function () {
-    return view('welcome', ['name' => 'Newton']);
+    return view('auth.login');
 });
