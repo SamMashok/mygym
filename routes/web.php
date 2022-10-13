@@ -25,6 +25,8 @@ Route::view('/login', 'auth.login')->name('login');
 
 Route::view('/register', 'auth.register')->name('register');
 
+Route::redirect('/', 'dashboard');
+
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
 
 Route::post('/register', [UserController::class, 'store'])->name('users.store');
@@ -41,4 +43,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
 

@@ -14,6 +14,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>S/N</th>
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
@@ -22,13 +23,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @php($sn = 1)
                     @foreach ($users as $user)
                         <tr>
-                            <td><?= $user->name; ?></td>
-                            <td><?= $user->username; ?></td>
-                            <td><?= $user->email; ?></td>
-                            <td><a href="{{url("{$user->id}")}}">Edit</a></td>
-                            <td><a href="{{url("delete/{$user->id}")}}" onclick="return confirm('One last chance!\n\nAre you sure you want to delete Account?')">Delete</a>
+                            <th>{{ $sn++ }}</th>
+                            <td>{{ $user->name }} </td>
+                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td><a href="{{ route('users.show', $user->id) }}">Edit</a></td>
+                            <td><a href="{{ route('users.destroy', $user->id) }}" onclick="return confirm('One last chance!\n\nAre you sure you want to delete Account?')">Delete</a>
                             </td>
                         </tr>
                     @endforeach

@@ -90,14 +90,18 @@
 
                         <div class="py-2">
                             <div class="tab-content" id="myTabContent">
+                                @if ($errors->any())
+                                    @foreach($errors->all() as $error)
+                                        <div class="container">
+                                            <p class='alert alert-danger'>{{ $error }}</p>
+                                        </div>
+                                    @endforeach
+                                @endif
                                 <div class="tab-pane fade show active" id="update-tab-pane" role="tabpanel" aria-labelledby="update-tab" tabindex="0">
+
                                     <form class="container" action="{{ route("users.update", $user->id) }}" method="POST" id="update-form">
-                                        {{ csrf_field()}}
-                                        @if ($errors->any())
-                                            @foreach($errors->all() as $error)
-                                                <p class='alert alert-danger'>{{ $error }}</p>
-                                            @endforeach
-                                        @endif
+                                        @method('PUT')
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -147,7 +151,8 @@
                                 <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
 
                                     <form class="container" method="POST" action="{{ route("users.update", $user->id) }}"  id="pwd-form">
-                                        {{ csrf_field()}}
+                                        @method('PUT')
+                                        @csrf
                                         <div class="mb-3">
                                             <label class="form-label" for="password">New Password</label>
                                             <input type="password" class="form-control" id="password" name="password" required>
