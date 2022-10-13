@@ -21,23 +21,24 @@ use App\Http\Controllers\AuthController;
 })->name('try');
 */
 
-Route::view('/login', 'auth.login');
+Route::view('/login', 'auth.login')->name('login');
 
-Route::view('/register', 'auth.register');
+Route::view('/register', 'auth.register')->name('register');
 
-Route::view('/dashboard', 'users.dashboard')->middleware("auth");
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
 
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::post('/register', [UserController::class, 'store'])->name('users.store');
 
-Route::get('/users', [UserController::class, 'index'])->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::view('/dashboard', 'users.dashboard')->name('dashboard');
 
-Route::get('/{user}', [UserController::class, 'show'])->middleware("auth");
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users', 'index')->name('users.index');
+        Route::get('/users/{user}', 'show')->name('users.show');
+        Route::put('/users/{user}', 'update')->name('users.update');
+        Route::delete('/users/{user}', 'destroy')->name('users.destroy');
+    });
+});
 
-Route::get('delete/{user}', [UserController::class, 'destroy'])->middleware("auth");
-
-Route::post('/login', [AuthController::class, 'authenticate']);
-
-Route::post('/register', [UserController::class, 'store']);
-
-Route::post('/update/{user}', [UserController::class, 'update']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 

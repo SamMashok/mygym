@@ -77,7 +77,7 @@
                                 </li>
 
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" role="tab" aria-controls="password-tab-pane" aria-selected="false">Change Password</button>
+                                    <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" role="tab" aria-controls="password-tab-pane" aria-selected="false">Reset Password</button>
                                 </li>
 
                                 <li class="nav-item" role="presentation">
@@ -91,7 +91,7 @@
                         <div class="py-2">
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="update-tab-pane" role="tabpanel" aria-labelledby="update-tab" tabindex="0">
-                                    <form class="container" action="{{ url("update/{$user->id}") }}" method="POST" id="update-form">
+                                    <form class="container" action="{{ route("users.update", $user->id) }}" method="POST" id="update-form">
                                         {{ csrf_field()}}
                                         @if ($errors->any())
                                             @foreach($errors->all() as $error)
@@ -146,28 +146,21 @@
 
                                 <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
 
-                                    <form class="container" method="POST" action=""  id="pwd-form">
+                                    <form class="container" method="POST" action="{{ route("users.update", $user->id) }}"  id="pwd-form">
                                         {{ csrf_field()}}
                                         <div class="mb-3">
-                                            <label class="form-label" for="oldPwd">Old Password</label>
-                                            <input type="password" class="form-control" id="oldPwd" name="oldPassword" required>
+                                            <label class="form-label" for="password">New Password</label>
+                                            <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="newPwd">New Password</label>
-                                            <input type="password" class="form-control" id="newPwd" name="password" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label class="form-label" for="repeatPwd">Repeat Password</label>
-                                            <input type="password" class="form-control" id="repeatPwd" name="repeatPassword" required>
+                                            <label class="form-label" for="password_confirmation">Repeat Password</label>
+                                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                                         </div>
                                         <div class="mt-4">
                                             <button type="submit" class="btn btn-primary rounded-0">Reset Password</button>
                                         </div>
-                                        <div class="mt-2">
-                                            <a class="link-secondary text-decoration-none" href="">Forgot Password?</a>
-                                        </div>
+
                                     </form>
                                 </div>
 
