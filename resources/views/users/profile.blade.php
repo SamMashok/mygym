@@ -13,8 +13,8 @@
                         <div class="row align-items-center">
                             <div class="col-auto">
                                 <div class="avatar-lg" id="div-avatar">
-                                    <img src="{{ $user->photo() }}"
-                                         class="rounded-circle mb-1" height="150px" width="150px" style="object-fit: cover; object-position: 50% 20%;">
+                                    <img src="{{ $user->photo() }}" class="rounded-circle mb-1"
+                                         height="150px" width="150px" style="object-fit: cover; object-position: 50% 20%;">
                                 </div>
                             </div>
                             <div class="col">
@@ -174,28 +174,49 @@
                                 </div>
 
                                 <div class="tab-pane fade container" id="advanced-tab-pane" role="tabpanel" aria-labelledby="advanced-tab" tabindex="0">
-                                    @if ($user->isAdmin())
+                                    @if ($user->isAdmin() && ! $user->isSuperAdmin())
                                         <div class="card rounded-0 shadow-sm mb-5">
                                             <div class="card-body">
                                                 <h5 class="card-title">Change User Type</h5>
                                                 <p class="card-text">
                                                     Here you can change the User Status type by simply hitting the button below.
                                                 </p>
-                                                <a href="" class="btn btn-warning rounded-0">
-                                                    Dismiss As Admin
-                                                </a>
+                                                @if (auth()->user()->isSuperAdmin())
+                                                    <form action="{{ route("users.update" , $user->id) }}" method="POST">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <input type="hidden" name="is_admin" value="2">
+                                                        <button type="submit" class="btn btn-primary rounded-0">
+                                                            Make Super Admin
+                                                        </button>
+                                                    </form>
+                                                    <br>
+                                                @endif
+                                                <form action="{{ route("users.update" , $user->id) }}" method="POST">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="is_admin" value="0">
+                                                    <button type="submit" class="btn btn-warning rounded-0">
+                                                        Dismiss As Admin
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
-                                    @else
+                                    @elseif (auth()->user()->isAdmin() && ! $user->isAdmin() && ! $user->isSuperAdmin())
                                         <div class="card rounded-0 shadow-sm mb-5">
                                             <div class="card-body">
                                                 <h5 class="card-title">Change User Type</h5>
                                                 <p class="card-text">
                                                     Here you can change the User Status type by simply hitting the button below.
                                                 </p>
-                                                <a href="" class="btn btn-primary rounded-0">
-                                                    Make Admin
-                                                </a>
+                                                <form action="{{ route("users.update" , $user->id) }}" method="POST">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="is_admin" value="1">
+                                                    <button type="submit" class="btn btn-primary rounded-0">
+                                                        Make Admin
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     @endif
@@ -206,9 +227,14 @@
                                             <p class="card-text">
                                                 This will delete the present profile photo and return to a default profile photo.
                                             </p>
-                                            <a href="" class="btn btn-danger rounded-0"  onclick="return confirm('Are you sure you want to delete this profile photo?')">
-                                                Delete Photo
-                                            </a>
+                                            <form action="" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="hidden" name="delete" value="delete">
+                                                <button type="submit" class="btn btn-danger rounded-0" onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
+                                                    Delete Photo
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
 
@@ -218,9 +244,14 @@
                                             <p class="card-text">
                                                 Here you can terminate user membership from this system and the account will no longer exist. Be very sure you want to carry out this action before hitting the button below.
                                             </p>
-                                            <a href="" class="btn btn-danger rounded-0"  onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
-                                                Delete Account
-                                            </a>
+                                            <form action="{{ route("users.update" , $user->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <input type="hidden" name="delete" value="delete">
+                                                <button type="submit" class="btn btn-danger rounded-0" onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
+                                                    Delete Account
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
 

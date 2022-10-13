@@ -27,11 +27,26 @@
                     @foreach ($users as $user)
                         <tr>
                             <th>{{ $sn++ }}</th>
-                            <td>{{ $user->name }} </td>
+                            <td>
+                                {{ $user->name }}
+                                @if ($user->isSuperAdmin())
+                                    <small class="badge rounded-pill bg-primary ml-2 text-light">Super Admin</small>
+                                @elseif ($user->isAdmin())
+                                    <small class="badge rounded-pill bg-success ml-2 text-light">Admin</small>
+                                @endif
+                            </td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
-                            <td><a href="{{ route('users.show', $user->id) }}">Edit</a></td>
-                            <td><a href="{{ route('users.destroy', $user->id) }}" onclick="return confirm('One last chance!\n\nAre you sure you want to delete Account?')">Delete</a>
+                            <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-primary rounded-pill">Edit</a></td>
+                            <td>
+                                <form action="{{ route("users.update" , $user->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="hidden" name="delete" value="delete">
+                                    <button type="submit" class="btn btn-danger rounded-pill" onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
