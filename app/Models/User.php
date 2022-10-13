@@ -41,14 +41,40 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
 
     public function password(): Attribute
     {
         return Attribute::set(fn ($value) => bcrypt($value));
 
     }
+
+    public function isAdmin()
+    {
+        return $this->is_admin !== 0;
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->is_admin == 2;
+    }
+
+    public function photo()
+    {
+        if ($this->photo == null && $this->gender == "M" ) {
+
+            return asset("uploads/defaultmale.png");
+        } elseif ($this->photo == null && $this->gender == "F") {
+
+            return asset("uploads/defaultfemale.png");
+        } else {
+
+            return asset("uploads/{$this->photo}?".mt_rand());
+        }
+
+    }
+
 }

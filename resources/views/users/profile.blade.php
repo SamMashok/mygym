@@ -13,14 +13,18 @@
                         <div class="row align-items-center">
                             <div class="col-auto">
                                 <div class="avatar-lg" id="div-avatar">
-                                    <img src="https://www.ysm.ca/wp-content/uploads/2020/02/default-avatar.jpg"
+                                    <img src="{{ $user->photo() }}"
                                          class="rounded-circle mb-1" height="150px" width="150px" style="object-fit: cover; object-position: 50% 20%;">
                                 </div>
                             </div>
                             <div class="col">
                                 <div>
                                     <h4 class="mt-1 mb-1 text-white">{{ $user->name }}</h4>
-                                    @if($user->is_admin != 0)
+                                    @if($user->isSuperAdmin())
+                                        <p class="font-13 text-white-50">
+                                            Super Admin
+                                        </p>
+                                    @elseif($user->isAdmin())
                                         <p class="font-13 text-white-50">
                                             Admin
                                         </p>
@@ -170,7 +174,7 @@
                                 </div>
 
                                 <div class="tab-pane fade container" id="advanced-tab-pane" role="tabpanel" aria-labelledby="advanced-tab" tabindex="0">
-                                    @if ($user->is_admin)
+                                    @if ($user->isAdmin())
                                         <div class="card rounded-0 shadow-sm mb-5">
                                             <div class="card-body">
                                                 <h5 class="card-title">Change User Type</h5>
