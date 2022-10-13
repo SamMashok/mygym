@@ -103,7 +103,7 @@
                                 @endif
                                 <div class="tab-pane fade show active" id="update-tab-pane" role="tabpanel" aria-labelledby="update-tab" tabindex="0">
 
-                                    <form class="container" action="{{ route("users.update", $user->id) }}" method="POST" id="update-form">
+                                    <form class="container" action="{{ route("users.update", $user) }}" method="POST" id="update-form">
                                         @method('PUT')
                                         @csrf
                                         <div class="row">
