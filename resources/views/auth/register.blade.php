@@ -38,7 +38,7 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                         </div>
-                        <form action="{{ url('register') }}" method="POST" class="user">
+                        <form action="{{ route('users.store') }}" method="POST" class="user">
                             {{ csrf_field()}}
                             @if ($errors->any())
                                 @foreach($errors->all() as $error)
@@ -93,7 +93,7 @@
                             <a class="small" href="">Forgot Password?</a>
                         </div>
                         <div class="text-center">
-                            <a class="small" href="login">Already have an account? Login!</a>
+                            <a class="small" href="{{ route('login') }}">Already have an account? Login!</a>
                         </div>
                     </div>
                 </div>

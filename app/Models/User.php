@@ -49,7 +49,6 @@ class User extends Authenticatable
     public function password(): Attribute
     {
         return Attribute::set(fn ($value) => bcrypt($value));
-
     }
 
     public function isAdmin()
@@ -62,19 +61,19 @@ class User extends Authenticatable
         return $this->is_admin == 2;
     }
 
-    public function photo()
+    public function photo(): Attribute
     {
-        if ($this->photo == null && $this->gender == "M" ) {
+        return Attribute::get(function ($value) {
+            if ($value == null && $this->gender == "M" ) {
+                return asset("uploads/defaultmale.png");
+            }
 
-            return asset("uploads/defaultmale.png");
-        } elseif ($this->photo == null && $this->gender == "F") {
+            if ($value == null && $this->gender == "F") {
+                return asset("uploads/defaultfemale.png");
+            }
 
-            return asset("uploads/defaultfemale.png");
-        } else {
-
-            return asset("uploads/{$this->photo}?".mt_rand());
-        }
-
+            return asset($value);
+        });
     }
 
 }

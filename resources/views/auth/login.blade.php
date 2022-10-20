@@ -41,7 +41,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                                     </div>
-                                    <form action="{{ url('login') }}" method="POST" class="user">
+                                    <form action="{{ route('login') }}" method="POST" class="user">
                                         {{ csrf_field()}}
                                         @error ('email')
                                             <p class='alert alert-danger'>{{ $message }}</p>
@@ -71,7 +71,7 @@
                                         <a class="small" href="">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register">Create an Account!</a>
+                                        <a class="small" href="{{ route('register') }}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
