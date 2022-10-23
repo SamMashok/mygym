@@ -22,6 +22,16 @@
                             <th>Delete User</th>
                         </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Edit Profile</th>
+                            <th>Delete User</th>
+                        </tr>
+                    </tfoot>
                     <tbody>
                     @php($sn = 1)
                     @foreach ($users as $user)
@@ -37,9 +47,9 @@
                             </td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
-                            <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-primary rounded-pill">Edit</a></td>
+                            <td><a href="{{ route('users.show', $user) }}" class="btn btn-primary rounded-pill">Edit</a></td>
                             <td>
-                                <form action="{{ route("users.update" , $user->id) }}" method="POST">
+                                <form action="{{ route("users.update" , $user) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <input type="hidden" name="delete" value="delete">
