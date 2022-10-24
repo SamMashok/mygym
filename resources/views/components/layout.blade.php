@@ -72,14 +72,14 @@
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Charts</span></a>
         </li>
-        @if(auth()->user()->isAdmin())
+        @admin()
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route("users.index") }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Users</span></a>
             </li>
-        @endif
+        @endadmin
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">

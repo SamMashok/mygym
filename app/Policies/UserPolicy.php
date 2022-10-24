@@ -30,11 +30,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        if ($user->is($model)) {
-            return true;
-        }
-
-        return $user->isAdmin();
+        return $user->is($model) || $user->isAdmin();
     }
 
     /**
@@ -57,11 +53,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        if ($user->is($model)) {
-            return true;
-        }
-
-        return $user->isAdmin();
+        return $user->is($model) || $user->isAdmin();
     }
 
     /**
@@ -73,11 +65,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        if ($user->is($model)) {
-            return true;
-        }
-
-        return $user->isAdmin();
+        return $user->is($model) || $user->isAdmin();
     }
 
     /**
@@ -104,7 +92,7 @@ class UserPolicy
         //
     }
 
-    public function changeUsertype(User $user, User $model)
+    public function changeType(User $user)
     {
         return $user->isAdmin();
     }

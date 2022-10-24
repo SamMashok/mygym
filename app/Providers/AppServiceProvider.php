@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       Blade::if('admin', function (User $user) {
-           return $user->isAdmin();
+       Blade::if('admin', function (User $user = null) {
+           return ($user ?? auth()->user())->isAdmin();
        });
     }
 }

@@ -39,11 +39,9 @@
                             <th>{{ $sn++ }}</th>
                             <td>
                                 {{ $user->name }}
-                                @if ($user->isSuperAdmin())
-                                    <small class="badge rounded-pill bg-primary ml-2 text-light">Super Admin</small>
-                                @elseif ($user->isAdmin())
+                                @admin($user)
                                     <small class="badge rounded-pill bg-success ml-2 text-light">Admin</small>
-                                @endif
+                                @endadmin
                             </td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>

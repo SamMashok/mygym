@@ -68,19 +68,14 @@ class UserPhotoController extends Controller
      * @return \Illuminate\Http\Response|RedirectResponse
      */
     public function update(User $user)
-    {
-        if (request()->has('deletePhoto')) {
-            $user->update(['photo' => null]);
-        }
-        else {
-            request()->validate([
-                'photo' => ['required','mimes:jpg,jpeg,png','max:2048']
-            ]);
+{
+        request()->validate([
+            'photo' => ['required','mimes:jpg,jpeg,png','max:2048']
+        ]);
 
-            $path = request()->photo->store('uploads');
+        $path = request()->photo->store('uploads');
 
-            $user->update(['photo' => $path]);
-        }
+        $user->update(['photo' => $path]);
 
         return back()->with('message', 'Profile update successful');
     }
@@ -89,10 +84,13 @@ class UserPhotoController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|RedirectResponse
      */
     public function destroy(User $user)
     {
+        $user->update(['photo' => null]);
+
+        return back()->with('message', 'Profile update successful');
 
     }
 }

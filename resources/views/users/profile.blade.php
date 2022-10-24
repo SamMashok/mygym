@@ -134,7 +134,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="mt-2">
                                             <button type="submit" class="btn btn-primary rounded-0 shadow-none">
                                                 Update Profile
@@ -152,7 +151,6 @@
                                             <label class="form-label" for="password">New Password</label>
                                             <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
-
                                         <div class="mb-3">
                                             <label class="form-label" for="password_confirmation">Repeat Password</label>
                                             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
@@ -160,37 +158,32 @@
                                         <div class="mt-4">
                                             <button type="submit" class="btn btn-primary rounded-0">Reset Password</button>
                                         </div>
-
                                     </form>
                                 </div>
 
                                 <div class="tab-pane fade container" id="advanced-tab-pane" role="tabpanel" aria-labelledby="advanced-tab" tabindex="0">
-                                    @can('change-usertype', $user)
+                                    @can('change-type', $user)
                                         <div class="card rounded-0 shadow-sm mb-5">
                                             <div class="card-body">
                                                 <h5 class="card-title">Change User Type</h5>
                                                 <p class="card-text">
                                                     Here you can change the User Status type by simply hitting the button below.
                                                 </p>
-                                                @admin($user)
-                                                    <form action="{{ route("users.update" , $user) }}" method="POST">
-                                                        @method('PUT')
-                                                        @csrf
+                                                <form action="{{ route("users.update" , $user) }}" method="POST">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    @admin($user)
                                                         <input type="hidden" name="user_type" value="1">
                                                         <button type="submit" class="btn btn-warning rounded-0">
                                                             Dismiss As Admin
                                                         </button>
-                                                    </form>
-                                                @else
-                                                    <form action="{{ route("users.update" , $user) }}" method="POST">
-                                                        @method('PUT')
-                                                        @csrf
+                                                    @else
                                                         <input type="hidden" name="user_type" value="2">
                                                         <button type="submit" class="btn btn-success rounded-0">
                                                             Make Admin
                                                         </button>
-                                                    </form>
-                                                @endadmin
+                                                    @endadmin
+                                                </form>
                                             </div>
                                         </div>
                                     @endcan
@@ -201,7 +194,7 @@
                                                 This will delete the present profile photo and return to a default profile photo.
                                             </p>
                                             <form action="{{ route('photos.destroy', $user) }}" method="POST">
-                                                @method('PUT')
+                                                @method('DELETE')
                                                 @csrf
                                                 <input type="hidden" name="deletePhoto" value="1">
                                                 <button type="submit" class="btn btn-danger rounded-0" onclick="return confirm('One last chance!\n\nAre you sure you want to delete User Photo?')">
