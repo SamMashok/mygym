@@ -103,4 +103,9 @@ class UserPolicy
     {
         //
     }
+
+    public function changeUsertype(User $user, User $model)
+    {
+        return $user->isAdmin();
+    }
 }

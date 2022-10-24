@@ -21,24 +21,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name'     => ['required'],
-            'email'    => ['required', 'email', 'unique:users'],
-            'username' => ['required', 'alpha_num', 'unique:users'],
-            'gender'   => ['required'],
-            'password' => ['required','confirmed']
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users',
+            'username' => 'required|alpha_num|unique:users',
+            'gender'   => 'required',
+            'password' => 'required|confirmed'
         ]);
 
-       User::create([
+        User::create([
             'name'     => $request->name,
             'email'    => $request->email,
             'username' => $request->username,
             'gender'   => $request->gender,
             'password' => $request->password
-           ]);
+        ]);
 
-       return to_route("login")
+        return to_route("login")
             ->with('message', 'Your account has been registered successfully, use your credentials to login');
-
     }
 
 

@@ -48,12 +48,12 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->is_admin !== 0;
+        return $this->user_type == 2;
     }
 
-    public function isSuperAdmin()
+    public function isMember()
     {
-        return $this->is_admin == 2;
+        return ! $this->isAdmin();
     }
 
     public function photo(): Attribute
