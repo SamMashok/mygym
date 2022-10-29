@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserPhotoController;
+use App\Http\Controllers\UserSubscriptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
@@ -46,11 +48,23 @@ Route::middleware('auth')->group(function () {
         Route::delete('/users/{user}', 'destroy') ->name('users.destroy');
     });
 
-    Route::put('/photos/{user}', [UserPhotoController::class, 'update'])     ->name('photos.update');
+    Route::controller(SubscriptionController::class)->group(function () {
+        Route::get('/subscriptions', 'index')->name('subscriptions.index');
+    });
 
-    Route::delete('/photos/{user}', [UserPhotoController::class, 'destroy']) ->name('photos.destroy');
+    Route::controller(UserSubscriptionController::class)->group(function () {
+        Route::get('/users/{user}/subscriptions', 'index')                ->name('users.subscriptions.index');
+        Route::get('/users/{user}/subscriptions/{subscription}', 'show')  ->name('users.subscriptions.show');
+        Route::post('/users/{user}/subscriptions', 'store') ->name('users.subscriptions.store');
 
-    Route::get('/logout', [AuthController::class, 'logout'])                 ->name('logout');
+    });
+
+    Route::controller(UserPhotoController::class)->group(function () {
+        Route::put('/photos/{user}', 'update')     ->name('photos.update');
+        Route::delete('/photos/{user}', 'destroy') ->name('photos.destroy');
+    });
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 

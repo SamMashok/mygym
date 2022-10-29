@@ -51,35 +51,42 @@
         </div>
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
+        <li class="nav-item {{ request()->route()->named('dashboard') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route("dashboard") }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="" >
-                <i class="fas fa-fw fa-cog"></i>
-                <span>My Sessions</span>
-            </a>
+        @unlessadmin()
+            <li class="nav-item {{ request()->route()->named('users.subscriptions.index') || request()->route()->named('users.subscriptions.show') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route("users.subscriptions.index", Auth::user()) }}" >
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>My Subscriptions</span>
+                </a>
 
-        </li>
-
+            </li>
+        @endadmin
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
-        </li>
         @admin()
+            <li class="nav-item {{ request()->route()->named('subscriptions.index') || request()->route()->named('users.subscriptions.index') || request()->route()->named('users.subscriptions.show') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route("subscriptions.index") }}">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Subscriptions</span></a>
+            </li>
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item {{ request()->route()->named('users.index') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route("users.index") }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Users</span></a>
             </li>
         @endadmin
+        <li class="nav-item {{ request()->route()->named('users.show') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route("users.show",  Auth::id()) }}">
+                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                <span>My Profile</span>
+            </a>
+        </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
@@ -92,7 +99,6 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="{{ route("users.show",  Auth::id()) }}">Edit Profile</a>
                     <a class="collapse-item" href="">Settings</a>
                     <a class="collapse-item" href="">Others</a>
                 </div>

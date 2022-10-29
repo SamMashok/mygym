@@ -39,9 +39,9 @@ class UserPolicy
      * @param  User  $user
      * @return Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, User $model)
     {
-        //
+        return $user->is($model) || $user->isAdmin();
     }
 
     /**

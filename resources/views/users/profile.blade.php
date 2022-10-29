@@ -79,7 +79,7 @@
                                 </li>
 
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" role="tab" aria-controls="password-tab-pane" aria-selected="false">Reset Password</button>
+                                    <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" role="tab" aria-controls="password-tab-pane" aria-selected="false">Change Password</button>
                                 </li>
 
                                 <li class="nav-item" role="presentation">
@@ -148,6 +148,10 @@
                                         @method('PUT')
                                         @csrf
                                         <div class="mb-3">
+                                            <label class="form-label" for="old_password">Old Password</label>
+                                            <input type="password" class="form-control" id="old_password" name="old_password" required>
+                                        </div>
+                                        <div class="mb-3">
                                             <label class="form-label" for="password">New Password</label>
                                             <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
@@ -156,7 +160,7 @@
                                             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                                         </div>
                                         <div class="mt-4">
-                                            <button type="submit" class="btn btn-primary rounded-0">Reset Password</button>
+                                            <button type="submit" class="btn btn-primary rounded-0">Change Password</button>
                                         </div>
                                     </form>
                                 </div>

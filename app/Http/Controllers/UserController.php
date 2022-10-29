@@ -51,13 +51,16 @@ class UserController extends Controller
 
     public function update(User $user)
     {
+        $this->authorize('update', $user);
+
         request()->validate([
-            'email'    => ['email', $unique = Rule::unique('users')->ignore($user)],
-            'username' => ['alpha_num', $unique],
-            'password' => ['confirmed']
+            'email'        => ['email', $unique = Rule::unique('users')->ignore($user)],
+            'username'     => ['alpha_num', $unique],
+            'old_password' => ['current_password'],
+            'password'     => ['confirmed']
         ]);
 
-        $user->update(request()->except('password_confirmation'));
+        $user->update(request()->except(['old_password', 'password_confirmation']));
 
         return back()->with('message', 'Profile update successful');
     }
@@ -65,9 +68,11 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
+
         $user->delete();
 
-        return to_route('users.index');
+        return to_route('users.index')->with('message', 'User has been deleted successfully');
     }
 
 }

@@ -35,8 +35,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
 
         return to_route("login")->with('message', 'Goodbye!');
     }

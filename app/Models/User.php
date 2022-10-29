@@ -41,24 +41,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
     public function password(): Attribute
     {
         return Attribute::set(fn ($value) => bcrypt($value));
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 
     public function isAdmin()
     {
         return $this->type == 2;
     }
 
-
     public function isMember()
     {
         return ! $this->isAdmin();
     }
-
 
     public function photo(): Attribute
     {

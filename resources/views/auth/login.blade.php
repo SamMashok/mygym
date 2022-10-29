@@ -23,33 +23,7 @@
 </head>
 
 <body class="bg-gradient-primary">
-    @if (session()->has('message'))
-        <div class="mt-3">
-            <p  id="alert" class='px-5 h5 text-center alert alert-success' style="display:none; position: fixed; right: 0.5%; z-index: 3;">
-                {{ session('message') }}
-                <button class="rounded-circle btn btn-light" id="alert-x" aria-hidden="true">×</button>
-            </p>
-        </div>
-
-        <script>
-            $(document).ready(function() {
-                $("#alert").slideDown("slow", hide);
-
-                function hide()
-                {
-                    setTimeout(() => $(this).slideUp("slow"), 5000);
-                }
-
-                $('#alert-x').click(function() {
-                    $("#alert").slideUp('slow');
-                });
-
-            });
-
-        </script>
-
-    @endif
-
+<x-flash />
     <div class="container">
 
         <!-- Outer Row -->
@@ -68,7 +42,7 @@
                                         <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                                     </div>
                                     <form action="{{ route('login') }}" method="POST" class="user">
-                                        {{ csrf_field()}}
+                                        @csrf
                                         @error ('email')
                                             <p class='alert alert-danger'>{{ $message }}</p>
                                         @enderror

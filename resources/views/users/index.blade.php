@@ -33,31 +33,31 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                    @php($sn = 1)
-                    @foreach ($users as $user)
-                        <tr>
-                            <th>{{ $sn++ }}</th>
-                            <td>
-                                {{ $user->name }}
-                                @admin($user)
-                                    <small class="badge rounded-pill bg-success ml-2 text-light">Admin</small>
-                                @endadmin
-                            </td>
-                            <td>{{ $user->username }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td><a href="{{ route('users.show', $user) }}" class="btn btn-primary rounded-pill">Edit</a></td>
-                            <td>
-                                <form action="{{ route("users.update" , $user) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <input type="hidden" name="delete" value="delete">
-                                    <button type="submit" class="btn btn-danger rounded-pill" onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
-                                        Delete
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
+                        @php($sn = 1)
+                        @foreach ($users as $user)
+                            <tr>
+                                <th>{{ $sn++ }}</th>
+                                <td>
+                                    {{ $user->name }}
+                                    @admin($user)
+                                        <small class="badge rounded-pill bg-success ml-2 text-light">Admin</small>
+                                    @endadmin
+                                </td>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td><a href="{{ route('users.show', $user) }}" class="btn btn-primary rounded-pill">Edit</a></td>
+                                <td>
+                                    <form action="{{ route("users.update" , $user) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="delete" value="delete">
+                                        <button type="submit" class="btn btn-danger rounded-pill" onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
