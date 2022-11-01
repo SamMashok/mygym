@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserPhotoController;
 use App\Http\Controllers\UserSubscriptionController;
@@ -28,13 +29,13 @@ use App\Http\Controllers\AuthController;
 Route::redirect('/', 'dashboard');
 
 Route::middleware('guest')->group(function () {
-    Route::view('/login', 'auth.login')                       ->name('login');
+    Route::get('/login',       [AuthController::class, 'login'])->name('auth.login');
 
-    Route::view('/register', 'auth.register')                 ->name('register');
+    Route::post('/login',      [AuthController::class, 'authenticate'])->name('auth.authenticate');
 
-    Route::post('/login', [AuthController::class, 'authenticate']) ->name('login.authenticate');
+    Route::get('/register',    [RegisterController::class, 'create'])->name('register.create');
 
-    Route::post('/register', [UserController::class, 'store'])     ->name('users.store');
+    Route::post('/register',   [RegisterController::class, 'store'])->name('register.store');
 
 });
 
@@ -49,22 +50,22 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(SubscriptionController::class)->group(function () {
-        Route::get('/subscriptions', 'index')->name('subscriptions.index');
+        Route::get('/subscriptions', 'index')              ->name('subscriptions.index');
+        Route::get('/subscriptions/{subscription}', 'show')->name('subscriptions.show');
     });
 
     Route::controller(UserSubscriptionController::class)->group(function () {
-        Route::get('/users/{user}/subscriptions', 'index')                ->name('users.subscriptions.index');
-        Route::get('/users/{user}/subscriptions/{subscription}', 'show')  ->name('users.subscriptions.show');
-        Route::post('/users/{user}/subscriptions', 'store') ->name('users.subscriptions.store');
+        Route::get('/users/{user}/subscriptions', 'index') ->name('users.subscriptions.index');
+        Route::post('/users/{user}/subscriptions', 'store')->name('users.subscriptions.store');
 
     });
 
     Route::controller(UserPhotoController::class)->group(function () {
-        Route::put('/photos/{user}', 'update')     ->name('photos.update');
-        Route::delete('/photos/{user}', 'destroy') ->name('photos.destroy');
+        Route::put('/photos/{user}', 'update')    ->name('photos.update');
+        Route::delete('/photos/{user}', 'destroy')->name('photos.destroy');
     });
 
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
 

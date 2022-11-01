@@ -177,12 +177,12 @@
                                                     @method('PUT')
                                                     @csrf
                                                     @admin($user)
-                                                        <input type="hidden" name="user_type" value="1">
+                                                        <input type="hidden" name="type" value="1">
                                                         <button type="submit" class="btn btn-warning rounded-0">
                                                             Dismiss As Admin
                                                         </button>
                                                     @else
-                                                        <input type="hidden" name="user_type" value="2">
+                                                        <input type="hidden" name="type" value="2">
                                                         <button type="submit" class="btn btn-success rounded-0">
                                                             Make Admin
                                                         </button>

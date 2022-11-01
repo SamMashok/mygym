@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function login()
+    {
+        return view('auth.login');
+    }
+
     /**
      * Handle an authentication attempt.
      *
@@ -36,6 +41,6 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return to_route("login")->with('message', 'Goodbye!');
+        return to_route("auth.login")->with('message', 'Goodbye!');
     }
 }

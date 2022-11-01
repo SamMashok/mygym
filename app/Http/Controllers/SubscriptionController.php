@@ -10,49 +10,19 @@ use Illuminate\Support\Str;
 
 class SubscriptionController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Subscription::class);
+    }
+
     public function index()
     {
-        $this->authorize('view-any', User::class);
-
         return view('users.subscriptions.index', ['subscriptions' => Subscription::all()]);
     }
 
-
-    public function store()
+    public function show(Subscription $subscription)
     {
-        $this->authorize('create', $user);
-
-        request()->validate([
-            'date'     => 'required',
-            'amount'   => 'required'
-        ]);
-
-        Subscription::create([
-            'date'        => request()->date,
-            'amount'      => request()->amount,
-            'user_id'     => Auth::id(),
-            'reference'   => strToUpper(Str::random(15))
-        ]);
-
-        return back()->with('message', 'Subscription successfully.');
-    }
-
-
-    public function show(User $user)
-    {
-
-    }
-
-
-    public function update(User $user)
-    {
-
-    }
-
-
-    public function destroy(User $user)
-    {
-
+        return view('users.subscriptions.show', ['subscription' => $subscription]);
     }
 
 }

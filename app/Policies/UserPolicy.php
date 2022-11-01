@@ -39,9 +39,9 @@ class UserPolicy
      * @param  User  $user
      * @return Response|bool
      */
-    public function create(User $user, User $model)
+    public function create(User $user)
     {
-        return $user->is($model) || $user->isAdmin();
+        return true;
     }
 
     /**
@@ -75,25 +75,10 @@ class UserPolicy
      * @param  User  $model
      * @return Response|bool
      */
-    public function restore(User $user, User $model)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  User  $user
-     * @param  User  $model
-     * @return Response|bool
-     */
-    public function forceDelete(User $user, User $model)
-    {
-        //
-    }
 
     public function changeType(User $user)
     {
         return $user->isAdmin();
     }
-}
+
+ }

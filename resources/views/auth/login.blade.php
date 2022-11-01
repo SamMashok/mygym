@@ -14,8 +14,9 @@
     <!-- Custom fonts for this template-->
     <link href="{{ asset("vendor/fontawesome-free/css/all.min.css") }}" rel="stylesheet" type="text/css">
     <link
-        href="{{ asset("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i") }}"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Custom styles for this template-->
     <link href="{{ asset("css/sb-admin-2.min.css") }}" rel="stylesheet">
@@ -41,11 +42,8 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                                     </div>
-                                    <form action="{{ route('login') }}" method="POST" class="user">
+                                    <form action="{{ route('auth.authenticate') }}" method="POST" class="user">
                                         @csrf
-                                        @error ('email')
-                                            <p class='alert alert-danger'>{{ $message }}</p>
-                                        @enderror
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 id="email" placeholder="Enter Email Address..." value="{{ old('email') }}" required>
@@ -71,7 +69,7 @@
                                         <a class="small" href="">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('register') }}">Create an Account!</a>
+                                        <a class="small" href="{{ route('register.create') }}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>

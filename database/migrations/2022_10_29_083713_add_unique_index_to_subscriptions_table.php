@@ -13,14 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->integer('amount')->default('1000');
-            $table->string('reference');
-            $table->date('date');
-            $table->timestamp('paid_at')->nullable();
-            $table->timestamps();
+        Schema::table('subscriptions', function (Blueprint $table) {
             $table->unique(['user_id', 'date']);
         });
     }
@@ -32,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::table('subscriptions', function (Blueprint $table) {
+            //
+        });
     }
 };
