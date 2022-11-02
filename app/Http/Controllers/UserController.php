@@ -28,13 +28,13 @@ class UserController extends Controller
             'email'    => 'required|email|unique:users',
             'username' => 'required|alpha_num|unique:users',
             'gender'   => 'required',
-            'password' => 'required|confirmed'
+            'type'     => 'required'
         ]);
 
         User::create($attributes);
 
-        return to_route("login")
-            ->with('message', 'Your account has been registered successfully, use your credentials to login');
+        return to_route("users.index")
+            ->with('message', 'User has been created successfully.');
     }
 
 

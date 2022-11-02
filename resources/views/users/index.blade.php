@@ -10,6 +10,13 @@
             <h6 class="m-0 font-weight-bold text-primary">All Users</h6>
         </div>
         <div class="card-body">
+            <div class="mb-4">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" data-bs-target="#modal-user-create" data-bs-toggle="modal">
+                        <i class="bi bi-person-plus mr-1"></i> Create new user
+                    </button>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -60,6 +67,57 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-user-create" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-right col-md-6">
+            <div class="modal-content p-3" style="min-width: 350px !important;">
+
+                <form action="{{ route('users.store') }}" method="POST" class="x-submit" data-then="reload">
+                    @csrf
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="standard-modalLabel"> Create User account</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <hr class="my-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="name">Full Name</label>
+                            <input class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="gender">Gender</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option></option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="type">User Type</label>
+                            <select class="form-control" id="type" name="type" required>
+                                <option value="1">Member</option>
+                                <option value="2">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

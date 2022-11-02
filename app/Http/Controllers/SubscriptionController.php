@@ -17,7 +17,7 @@ class SubscriptionController extends Controller
 
     public function index()
     {
-        return view('users.subscriptions.index', ['subscriptions' => Subscription::all()]);
+        return view('users.subscriptions.index', ['subscriptions' => Subscription::whereHas('user')->get()]);
     }
 
     public function show(Subscription $subscription)
