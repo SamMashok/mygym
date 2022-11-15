@@ -92,7 +92,7 @@
                                 <a class="small" href="">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="{{ route('auth.login') }}">Already have an account? Login!</a>
+                                <a class="small" href="{{ route('login') }}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>

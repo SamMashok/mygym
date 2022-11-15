@@ -6,7 +6,7 @@ use App\Http\Controllers\UserPhotoController;
 use App\Http\Controllers\UserSubscriptionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LogoutController;
 
 
 /*
@@ -29,14 +29,9 @@ use App\Http\Controllers\AuthController;
 Route::redirect('/', 'dashboard');
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login',       [AuthController::class, 'login'])->name('auth.login');
-
-    Route::post('/login',      [AuthController::class, 'authenticate'])->name('auth.authenticate');
-
+    Route::view('/login',       'auth.login')->name('login');
     Route::get('/register',    [RegisterController::class, 'create'])->name('register.create');
-
     Route::post('/register',   [RegisterController::class, 'store'])->name('register.store');
-
 });
 
 Route::middleware('auth')->group(function () {
@@ -66,7 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/photos/{user}', 'destroy')->name('photos.destroy');
     });
 
-    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/logout',  LogoutController::class)->name('logout');
 });
 
 

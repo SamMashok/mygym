@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>MyGym</title>
 
@@ -41,12 +42,10 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                                 </div>
-                                <form action="{{ route('auth.authenticate') }}" method="POST" class="user">
-                                    @csrf
+                                <form action="{{ route('api.login') }}" method="POST" class="user x-submit" data-then="reload">
                                     <div class="form-group">
                                         <input type="email" name="email" class="form-control form-control-user"
-                                               id="email" placeholder="Enter Email Address..."
-                                               value="{{ old('email') }}" required>
+                                               id="email" placeholder="Enter Email Address..." required>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="password" class="form-control form-control-user"
@@ -77,11 +76,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
 
 <!-- Bootstrap core JavaScript-->

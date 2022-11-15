@@ -35,7 +35,7 @@ class RegisterController extends Controller
 
         User::create($attributes);
 
-        return to_route("auth.login")
+        return to_route("login")
             ->with('message', 'Your account has been registered successfully, use your credentials to login');
     }
 
