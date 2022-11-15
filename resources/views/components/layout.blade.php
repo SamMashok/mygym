@@ -54,7 +54,7 @@
         </div>
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item {{ request()->route()->named('dashboard') ? 'active' : '' }}">
+        <li class="nav-item">
             <a class="nav-link" href="{{ route("dashboard") }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
@@ -422,6 +422,9 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset("js/demo/datatables-demo.js") }}"></script>
 
+<script>
+    $('.nav-link[href="{{ url()->current() }}"]').parent().addClass('active');
+</script>
 
 </body>
 
