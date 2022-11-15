@@ -23,7 +23,7 @@ class SubscriptionFactory extends Factory
             'amount'    => '1000',
             'reference' => strToUpper(Str::random(15)),
             'date'      => now(),
-            'paid_at'   =>now(),
+            'paid_at'   => now(),
         ];
     }
 }
