@@ -23,36 +23,33 @@
                         <tr>
                             <th>S/N</th>
                             <th>Name</th>
+                            <th>User type</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Edit Profile</th>
+                            <th>User Subscriptions</th>
                             <th>Delete User</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>S/N</th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Edit Profile</th>
-                            <th>Delete User</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @php($sn = 1)
                         @foreach ($users as $user)
                             <tr>
                                 <th>{{ $sn++ }}</th>
                                 <td>
-                                    {{ $user->name }}
+                                    <a href="{{ route('users.show', $user) }}">{{ $user->name }}</a>
+                                </td>
+                                <td>
                                     @admin($user)
                                         <small class="badge rounded-pill bg-success ml-2 text-light">Admin</small>
+                                    @else
+                                        <small class="badge rounded-pill bg-secondary ml-2 text-light">Member</small>
                                     @endadmin
                                 </td>
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td><a href="{{ route('users.show', $user) }}" class="btn btn-primary rounded-pill">Edit</a></td>
+                                <td>
+                                    <a href="{{ route('users.subscriptions.index', $user) }}" class="btn btn-primary rounded-pill">View</a>
+                                </td>
                                 <td>
                                     <form action="{{ route("users.update" , $user) }}" method="POST">
                                         @method('DELETE')
@@ -86,15 +83,15 @@
                         <hr class="my-3">
                         <div class="form-group mb-3">
                             <label class="form-label" for="name">Full Name</label>
-                            <input class="form-control" id="name" name="name" required>
+                            <input class="form-control" id="name" name="name" value="{{ old('name') }}" required>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label" for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label" for="username">Username</label>
-                            <input class="form-control" id="username" name="username" required>
+                            <input class="form-control" id="username" name="username" value="{{ old('username') }}" required>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label" for="gender">Gender</label>
@@ -103,6 +100,9 @@
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
                             </select>
+                            <script>
+                                document.querySelector('#gender').value = "{{ old('gender') }}";
+                            </script>
                         </div>
 
                         <div class="form-group mb-3">
@@ -111,6 +111,9 @@
                                 <option value="1">Member</option>
                                 <option value="2">Admin</option>
                             </select>
+                            <script>
+                                document.querySelector('#type').value = "{{ old('type') }}";
+                            </script>
                         </div>
                     </div>
                     <div class="modal-footer">

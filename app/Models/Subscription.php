@@ -12,10 +12,15 @@ class Subscription extends Model
 
     protected $guarded = [];
 
+    protected $with = ['user'];
+
+    protected $touches = ['user'];
+
     public static function booted()
     {
         static::creating(function ($subscription) {
             $subscription->reference ??= Str::random(15);
+
         });
     }
 

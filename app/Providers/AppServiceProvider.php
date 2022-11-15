@@ -33,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('paid', function (Subscription $subscription) {
             return $subscription->paid_at != null;
         });
+        Blade::if('subscriptionRoute', fn () => request()->route()->named('users.subscriptions.index'));
     }
 }

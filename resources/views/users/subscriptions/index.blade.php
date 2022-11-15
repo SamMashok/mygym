@@ -1,9 +1,7 @@
 <x-layout>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Subscriptions</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
-
+    
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -40,9 +38,15 @@
                                 <tr>
                                     @admin
                                         <td>
-                                            <a href="{{ route('users.subscriptions.index', $subscription->user) }}" class="">
-                                                {{ $subscription->user->name }}
-                                            </a>
+                                            @subscriptionRoute
+                                                <a href="{{ route('users.show', $subscription->user) }}" class="">
+                                                    {{ $subscription->user->name }}
+                                                </a>
+                                            @else
+                                                <a href="{{ route('users.subscriptions.index', $subscription->user) }}" class="">
+                                                    {{ $subscription->user->name }}
+                                                </a>
+                                            @endsubscriptionRoute
                                         </td>
                                     @endadmin
                                     <td>{{ $subscription->date }}</td>
@@ -70,7 +74,7 @@
             @endif
         </div>
     </div>
-    @if(request()->route()->named('users.subscriptions.index'))
+    @subscriptionRoute
         <div class="row">
             <!-- Content Column -->
             <div class="col-lg-6 mb-4">
@@ -93,7 +97,7 @@
                                     <option value="1000">1000</option>
                                 </select>
                             </div>
-                            <div class="d-grid mt-4">
+                            <div class="mt-4">
                                 <button type="submit" class="btn btn-primary rounded-0">subscribe</button>
                             </div>
                         </form>
@@ -101,6 +105,6 @@
                 </div>
             </div>
         </div>
-    @endif
+    @endsubscriptionRoute
 </x-layout>
 

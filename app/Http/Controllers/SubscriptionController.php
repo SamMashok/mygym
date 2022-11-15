@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subscription;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class SubscriptionController extends Controller
 {
@@ -17,7 +14,7 @@ class SubscriptionController extends Controller
 
     public function index()
     {
-        return view('users.subscriptions.index', ['subscriptions' => Subscription::whereHas('user')->get()]);
+        return view('users.subscriptions.index', ['subscriptions' => Subscription::has('user')->get()]);
     }
 
     public function show(Subscription $subscription)
