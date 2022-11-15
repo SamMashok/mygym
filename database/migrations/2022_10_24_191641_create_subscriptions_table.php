@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('date');
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
+            
             $table->unique(['user_id', 'date']);
         });
     }

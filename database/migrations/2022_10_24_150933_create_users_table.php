@@ -25,6 +25,8 @@ return new class extends Migration
             $table->enum('type', [1,2])->default(1);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
