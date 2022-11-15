@@ -63,7 +63,7 @@
         <!-- Nav Item - Pages Collapse Menu -->
         @unlessadmin()
             <li class="nav-item {{ request()->route()->named('users.subscriptions.index') || request()->route()->named('users.subscriptions.show') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route("users.subscriptions.index", Auth::user()) }}" >
+                <a class="nav-link" href="{{ route("users.subscriptions.index", user()) }}" >
                     <i class="fas fa-fw fa-cog"></i>
                     <span>My Subscriptions</span>
                 </a>
