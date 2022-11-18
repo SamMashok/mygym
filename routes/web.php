@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users',                UserController::class)->except('create');
     Route::resource('subscriptions',        SubscriptionController::class)->only(['index', 'show']);
-    Route::resource('users.subscriptions',  UserSubscriptionController::class)->only(['index', 'store']);
+    Route::resource('users.subscriptions',  UserSubscriptionController::class)->only('index');
 
     Route::controller(UserPhotoController::class)->group(function () {
         Route::put('/photos/{user}', 'update')    ->name('photos.update');

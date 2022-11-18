@@ -1,7 +1,6 @@
 <x-layout>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Subscriptions</h1>
-    
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -84,7 +83,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Renew Subscription</h6>
                     </div>
                     <div class="card-body">
-                        <form class="container" method="POST" action="{{ route('users.subscriptions.store', $user) }}">
+                        <form class="container" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label h6" for="date">date</label>

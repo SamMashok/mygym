@@ -72,7 +72,7 @@
         <div class="modal-dialog modal-lg modal-right col-md-6">
             <div class="modal-content p-3" style="min-width: 350px !important;">
 
-                <form action="{{ route('users.store') }}" method="POST" class="x-submit" data-then="reload">
+                <form action="{{ route('api.users.store') }}" method="POST" class="x-submit" data-then="reload">
                     @csrf
                     <div class="modal-header">
                         <h4 class="modal-title" id="standard-modalLabel"> Create User account</h4>
@@ -101,7 +101,7 @@
                                 <option value="F">Female</option>
                             </select>
                             <script>
-                                document.querySelector('#gender').value = "{{ old('gender') }}";
+                                document.querySelector('#gender').value = "{{ old('gender', 'M') }}";
                             </script>
                         </div>
 
@@ -112,7 +112,7 @@
                                 <option value="2">Admin</option>
                             </select>
                             <script>
-                                document.querySelector('#type').value = "{{ old('type') }}";
+                                document.querySelector('#type').value = "{{ old('type', '1') }}";
                             </script>
                         </div>
                     </div>

@@ -94,7 +94,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="update-tab-pane" role="tabpanel" aria-labelledby="update-tab" tabindex="0">
 
-                                    <form class="container" action="{{ route("users.update", $user) }}" method="POST" id="update-form">
+                                    <form class="container" action="{{ route("api.users.update", $user) }}" method="POST" id="update-form">
                                         @method('PUT')
                                         @csrf
                                         <div class="row">
@@ -144,7 +144,7 @@
 
                                 <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
 
-                                    <form class="container" method="POST" action="{{ route("users.update", $user->id) }}"  id="pwd-form">
+                                    <form class="container" method="POST" action="{{ route("api.users.update", $user->id) }}"  id="pwd-form">
                                         @method('PUT')
                                         @csrf
                                         <div class="mb-3">
@@ -173,7 +173,7 @@
                                                 <p class="card-text">
                                                     Here you can change the User Status type by simply hitting the button below.
                                                 </p>
-                                                <form action="{{ route("users.update" , $user) }}" method="POST">
+                                                <form action="{{ route("api.users.update" , $user) }}" method="POST">
                                                     @method('PUT')
                                                     @csrf
                                                     @admin($user)
@@ -213,7 +213,7 @@
                                             <p class="card-text">
                                                 Here you can terminate User membership from this system and the account will no longer exist. Be very sure you want to carry out this action before hitting the button below.
                                             </p>
-                                            <form action="{{ route("users.update" , $user) }}" method="POST">
+                                            <form action="{{ route("api.users.destroy" , $user) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <input type="hidden" name="delete" value="delete">
