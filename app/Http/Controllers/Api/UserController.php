@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -25,8 +26,7 @@ class UserController extends Controller
 
         User::create($attributes);
 
-        return to_route("users.index")
-            ->with('message', 'User has been created successfully.');
+        return Response::api('User has been created successfully.');
     }
 
 
@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         $user->update($request->except(['old_password', 'password_confirmation']));
 
-        return back()->with('message', 'Profile update successful');
+        return Response::api('Profile update successful');
     }
 
 
@@ -42,7 +42,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return to_route('users.index')->with('message', 'User has been deleted successfully');
+        return Response::api('User has been deleted successfully');
     }
 
 }

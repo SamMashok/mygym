@@ -43,10 +43,8 @@
                             </div>
                         </div>
                     </div> <!-- end col-->
-
                     <div class="col-sm-4">
                         <div class="text-center mt-sm-0 mt-3 text-sm-end">
-
                             <form action="{{ route('photos.update', $user) }}" id="form-photo"  method="POST" enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
@@ -55,7 +53,6 @@
                                 </label>
                                 <input type="file" id="photo" name="photo" onchange="document.querySelector('#form-photo').submit()" style="display: none;"  accept="image/jpeg,image/png">
                             </form>
-
                         </div>
                     </div> <!-- end col-->
                 </div> <!-- end row -->
@@ -71,54 +68,42 @@
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <div class="mb-4 mt-3">
-
                             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="update-tab" data-bs-toggle="tab" data-bs-target="#update-tab-pane" role="tab" aria-controls="update-tab-pane" aria-selected="true">Edit Profile</button>
                                 </li>
-
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" role="tab" aria-controls="password-tab-pane" aria-selected="false">Change Password</button>
                                 </li>
-
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="advanced-tab" data-bs-toggle="tab" data-bs-target="#advanced-tab-pane" role="tab" aria-controls="advanced-tab-pane" aria-selected="false">Advanced</button>
                                 </li>
-
                             </ul>
-
                         </div>
-
                         <div class="py-2">
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="update-tab-pane" role="tabpanel" aria-labelledby="update-tab" tabindex="0">
-
-                                    <form class="container" action="{{ route("api.users.update", $user) }}" method="POST" id="update-form">
+                                    <form class="container x-submit" action="{{ route("api.users.update", $user) }}" method="POST" id="update-form" data-then="alert">
                                         @method('PUT')
-                                        @csrf
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="name">Full Name</label>
-                                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+                                                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label"  for="email">Email Address</label>
-                                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
+                                                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label"  for="username">Username</label>
-                                                    <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" required>
+                                                    <input type="text" class="form-control" id="username" name="username" value="{{  $user->username }}" required>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="gender">Gender</label>
@@ -127,9 +112,8 @@
                                                         <option value="M">male</option>
                                                         <option value="F">female</option>
                                                     </select>
-
                                                     <script>
-                                                        document.querySelector('#gender').value = "{{ old('gender', $user->gender) }}";
+                                                        document.querySelector('#gender').value = "{{ $user->gender }}";
                                                     </script>
                                                 </div>
                                             </div>
@@ -141,12 +125,9 @@
                                         </div>
                                     </form>
                                 </div>
-
                                 <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
-
-                                    <form class="container" method="POST" action="{{ route("api.users.update", $user->id) }}"  id="pwd-form">
+                                    <form class="container x-submit" method="POST" action="{{ route("api.users.update", $user->id) }}"  id="pwd-form">
                                         @method('PUT')
-                                        @csrf
                                         <div class="mb-3">
                                             <label class="form-label" for="old_password">Old Password</label>
                                             <input type="password" class="form-control" id="old_password" name="old_password" required>
@@ -164,7 +145,6 @@
                                         </div>
                                     </form>
                                 </div>
-
                                 <div class="tab-pane fade container" id="advanced-tab-pane" role="tabpanel" aria-labelledby="advanced-tab" tabindex="0">
                                     @can('change-type', $user)
                                         <div class="card rounded-0 shadow-sm mb-5">
@@ -173,9 +153,8 @@
                                                 <p class="card-text">
                                                     Here you can change the User Status type by simply hitting the button below.
                                                 </p>
-                                                <form action="{{ route("api.users.update" , $user) }}" method="POST">
+                                                <form action="{{ route("api.users.update" , $user) }}" method="POST" class="x-submit" data-then="reload">
                                                     @method('PUT')
-                                                    @csrf
                                                     @admin($user)
                                                         <input type="hidden" name="type" value="1">
                                                         <button type="submit" class="btn btn-warning rounded-0">
@@ -197,9 +176,8 @@
                                             <p class="card-text">
                                                 This will delete the present profile photo and return to a default profile photo.
                                             </p>
-                                            <form action="{{ route('photos.destroy', $user) }}" method="POST">
+                                            <form action="{{ route('photos.destroy', $user) }}" method="POST" class="x-submit">
                                                 @method('DELETE')
-                                                @csrf
                                                 <input type="hidden" name="deletePhoto" value="1">
                                                 <button type="submit" class="btn btn-danger rounded-0" onclick="return confirm('One last chance!\n\nAre you sure you want to delete User Photo?')">
                                                     Delete Photo
@@ -213,9 +191,8 @@
                                             <p class="card-text">
                                                 Here you can terminate User membership from this system and the account will no longer exist. Be very sure you want to carry out this action before hitting the button below.
                                             </p>
-                                            <form action="{{ route("api.users.destroy" , $user) }}" method="POST">
+                                            <form action="{{ route("api.users.destroy" , $user) }}" method="POST" class="x-submit" data-then="reload">
                                                 @method('DELETE')
-                                                @csrf
                                                 <input type="hidden" name="delete" value="delete">
                                                 <button type="submit" class="btn btn-danger rounded-0" onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
                                                     Delete Account
@@ -232,22 +209,22 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            function showPasswordTab() {
-                $("#update-tab-pane").removeClass("show");
-                $("#update-tab-pane").removeClass("active");
-                $("#update-tab").removeClass("active");
-                $("#password-tab-pane").addClass("show");
-                $("#password-tab-pane").addClass("active");
-                $("#password-tab").addClass("active");
-            }
-            @error('password')
-                showPasswordTab();
-            @enderror
-        });
+<script>
+    $(document).ready(function() {
+        function showPasswordTab() {
+            $("#update-tab-pane").removeClass("show");
+            $("#update-tab-pane").removeClass("active");
+            $("#update-tab").removeClass("active");
+            $("#password-tab-pane").addClass("show");
+            $("#password-tab-pane").addClass("active");
+            $("#password-tab").addClass("active");
+        }
+        @error('password')
+            showPasswordTab();
+        @enderror
+    });
 
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
-    </script>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+</script>
 </x-layout>

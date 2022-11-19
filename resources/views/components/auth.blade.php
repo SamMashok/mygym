@@ -24,7 +24,6 @@
 </head>
 
 <body class="bg-gradient-primary">
-<x-flash/>
 <div class="container">
 
     <!-- Outer Row -->

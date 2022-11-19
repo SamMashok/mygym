@@ -51,7 +51,7 @@
                                     <a href="{{ route('users.subscriptions.index', $user) }}" class="btn btn-primary rounded-pill">View</a>
                                 </td>
                                 <td>
-                                    <form action="{{ route("users.update" , $user) }}" method="POST">
+                                    <form action="{{ route("api.users.destroy" , $user) }}" method="POST" class="x-submit" data-then="reload">
                                         @method('DELETE')
                                         @csrf
                                         <input type="hidden" name="delete" value="delete">
@@ -73,7 +73,6 @@
             <div class="modal-content p-3" style="min-width: 350px !important;">
 
                 <form action="{{ route('api.users.store') }}" method="POST" class="x-submit" data-then="reload">
-                    @csrf
                     <div class="modal-header">
                         <h4 class="modal-title" id="standard-modalLabel"> Create User account</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -83,15 +82,15 @@
                         <hr class="my-3">
                         <div class="form-group mb-3">
                             <label class="form-label" for="name">Full Name</label>
-                            <input class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+                            <input class="form-control" id="name" name="name" required>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label" for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label" for="username">Username</label>
-                            <input class="form-control" id="username" name="username" value="{{ old('username') }}" required>
+                            <input class="form-control" id="username" name="username" required>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label" for="gender">Gender</label>
@@ -101,7 +100,7 @@
                                 <option value="F">Female</option>
                             </select>
                             <script>
-                                document.querySelector('#gender').value = "{{ old('gender', 'M') }}";
+                                document.querySelector('#gender').value = "M";
                             </script>
                         </div>
 
@@ -112,7 +111,7 @@
                                 <option value="2">Admin</option>
                             </select>
                             <script>
-                                document.querySelector('#type').value = "{{ old('type', '1') }}";
+                                document.querySelector('#type').value = "1";
                             </script>
                         </div>
                     </div>

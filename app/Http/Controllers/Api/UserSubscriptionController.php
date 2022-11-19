@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StoreSubscriptionRequest;
 use App\Models\User;
+use Illuminate\Http\Response;
 
 class UserSubscriptionController extends Controller
 {
@@ -11,6 +12,6 @@ class UserSubscriptionController extends Controller
     {
         $user->subscriptions()->create($request->validated());
 
-        return back()->with('message', 'Subscription successful.');
+        return Response::api('Subscription successful.');
     }
 }

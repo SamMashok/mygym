@@ -8,11 +8,11 @@
         </div>
         <div class="form-group">
             <input type="email" name="email" class="form-control form-control-user" id="email"
-                   placeholder="Email Address" value="{{ old('email') }}" required>
+                   placeholder="Email Address" required>
         </div>
         <div class="form-group">
             <input type="text" name="username" class="form-control form-control-user" id="username"
-                   placeholder="Username" value="{{ old('username') }}" required>
+                   placeholder="Username" required>
         </div>
         <div class="form-group">
             <select class="form-select form-select-md rounded-pill form-control" name="gender" id="gender" required>
@@ -24,12 +24,10 @@
             <input type="password" name="password" class="form-control form-control-user"
                    id="password" placeholder="Password" required>
         </div>
-
         <div class="form-group">
             <input type="password" name="password_confirmation" class="form-control form-control-user"
                    id="password_confirmation" placeholder="Repeat Password" required>
         </div>
-
         <button type="submit" class="btn btn-primary btn-user btn-block">
             Register Account
         </button>

@@ -21,7 +21,10 @@ class RegisterController extends Controller
 
         User::create($attributes);
 
-        return Response::api('Your account has been registered successfully, use your credentials to login');
+        return Response::api([
+            'message' => 'Your account has been registered successfully, use your credentials to login',
+            'data'    => ['redirect' => route('login')]
+        ]);
     }
 
 }

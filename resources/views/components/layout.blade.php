@@ -30,8 +30,6 @@
 </head>
 
 <body id="page-top">
-<x-flash />
-
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -87,7 +85,7 @@
             </li>
         @endadmin
         <li class="nav-item {{ request()->route()->named('users.show') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route("users.show",  Auth::id()) }}">
+            <a class="nav-link" href="{{ route("users.show",  user()) }}">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 <span>My Profile</span>
             </a>
@@ -427,6 +425,10 @@
 <script>
     $('.nav-link[href="{{ url()->current() }}"]').parent().addClass('active');
 </script>
+
+<script src="{{ asset("js/bootstrap-notify.js") }}"></script>
+<script src="{{ asset("js/sweetalert.min.js") }}"></script>
+<script src="{{ asset("js/request.js") }}"></script>
 
 </body>
 

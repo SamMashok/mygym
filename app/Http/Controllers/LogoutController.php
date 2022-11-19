@@ -8,6 +8,6 @@ class LogoutController extends Controller
     {
         auth()->logout();
 
-        return to_route("login")->with('message', 'Goodbye!');
+        return to_route("login");
     }
 }

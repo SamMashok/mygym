@@ -7,7 +7,7 @@
             <h6 class="m-0 font-weight-bold text-primary">All Subscriptions</h6>
         </div>
         <div class="card-body">
-            @if($subscriptions->isEmpty() && auth()->user()->isMember())
+            @if($subscriptions->isEmpty() && user()->isMember())
                 <div class="text-center py-3">
                     <img src="{{ asset("img/sub.png") }}" width="150" alt="">
                     <h4 class="mt-3">Ready to make your first Subscription, {{ $user->username }}?</h4>
@@ -83,13 +83,12 @@
                         <h6 class="m-0 font-weight-bold text-primary">Renew Subscription</h6>
                     </div>
                     <div class="card-body">
-                        <form class="container" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}">
+                        <form class="container x-submit" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}" data-then="alert">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label h6" for="date">date</label>
                                 <input type="date" class="form-control" name="date" id="date" value="" required>
                             </div>
-
                             <div class="mb-4">
                                 <label class="form-label h6" for="amount">amount</label>
                                 <select class="form-control" name="amount" id="amount" required>
