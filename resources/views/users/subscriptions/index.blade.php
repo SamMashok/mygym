@@ -83,7 +83,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Renew Subscription</h6>
                     </div>
                     <div class="card-body">
-                        <form class="container x-submit" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}" data-then="alert">
+                        <form class="container x-submit" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}" data-then="reload">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label h6" for="date">date</label>

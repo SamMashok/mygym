@@ -62,7 +62,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         @unlessadmin()
-            <li class="nav-item {{ request()->route()->named('users.subscriptions.index') || request()->route()->named('users.subscriptions.show') ? 'active' : '' }}">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route("users.subscriptions.index", user()) }}" >
                     <i class="fas fa-fw fa-cog"></i>
                     <span>My Subscriptions</span>
@@ -72,19 +72,19 @@
         @endadmin
         <!-- Nav Item - Charts -->
         @admin()
-            <li class="nav-item {{ request()->route()->named('subscriptions.index') || request()->route()->named('users.subscriptions.index') || request()->route()->named('users.subscriptions.show') ? 'active' : '' }}">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route("subscriptions.index") }}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Subscriptions</span></a>
             </li>
             <!-- Nav Item - Tables -->
-            <li class="nav-item {{ request()->route()->named('users.index') ? 'active' : '' }}">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route("users.index") }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Users</span></a>
             </li>
         @endadmin
-        <li class="nav-item {{ request()->route()->named('users.show') ? 'active' : '' }}">
+        <li class="nav-item">
             <a class="nav-link" href="{{ route("users.show",  user()) }}">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 <span>My Profile</span>
