@@ -23,6 +23,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('users',                UserController::class)->except('create');
+    Route::resource('users',                UserController::class)->only(['store', 'update', 'destroy']);
     Route::resource('users.subscriptions',  UserSubscriptionController::class)->only('store');
 });

@@ -54,8 +54,7 @@
                                     <form action="{{ route("api.users.destroy" , $user) }}" method="POST" class="x-submit" data-then="reload">
                                         @method('DELETE')
                                         @csrf
-                                        <input type="hidden" name="delete" value="delete">
-                                        <button type="submit" class="btn btn-danger rounded-pill" onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
+                                        <button type="submit" class="btn btn-danger rounded-pill">
                                             Delete
                                         </button>
                                     </form>
@@ -92,27 +91,21 @@
                             <label class="form-label" for="username">Username</label>
                             <input class="form-control" id="username" name="username" required>
                         </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label" for="gender">Gender</label>
-                            <select class="form-control" id="gender" name="gender" required>
-                                <option></option>
-                                <option value="M">Male</option>
-                                <option value="F">Female</option>
-                            </select>
-                            <script>
-                                document.querySelector('#gender').value = "M";
-                            </script>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label class="form-label" for="type">User Type</label>
-                            <select class="form-control" id="type" name="type" required>
-                                <option value="1">Member</option>
-                                <option value="2">Admin</option>
-                            </select>
-                            <script>
-                                document.querySelector('#type').value = "1";
-                            </script>
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="form-label" for="gender">Gender</label>
+                                <select class="form-control" id="gender" name="gender" required>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label class="form-label" for="type">User Type</label>
+                                <select class="form-control" id="type" name="type" required>
+                                    <option value="1">Member</option>
+                                    <option value="2">Admin</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

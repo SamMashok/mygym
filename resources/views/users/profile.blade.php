@@ -126,7 +126,7 @@
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
-                                    <form class="container x-submit" method="POST" action="{{ route("api.users.update", $user->id) }}"  id="pwd-form">
+                                    <form class="container x-submit" method="POST" action="{{ route("api.users.update", $user->id) }}"  id="pwd-form" data-then="reload">
                                         @method('PUT')
                                         <div class="mb-3">
                                             <label class="form-label" for="old_password">Old Password</label>

@@ -34,7 +34,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'users.dashboard')->name('dashboard');
 
-    Route::resource('users',                UserController::class)->except('create');
+    Route::resource('users',                UserController::class)->only(['index', 'show']);
     Route::resource('subscriptions',        SubscriptionController::class)->only(['index', 'show']);
     Route::resource('users.subscriptions',  UserSubscriptionController::class)->only('index');
 
