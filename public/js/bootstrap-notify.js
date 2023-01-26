@@ -181,7 +181,7 @@
                                 var $icon = this.$ele.find('[data-notify="icon"]');
                                 if (self.settings.icon_type.toLowerCase() === 'class') {
                                     $icon.removeClass(self.settings.content.icon).addClass(commands[cmd]);
-                                } else {
+                                } else {``
                                     if (!$icon.is('img')) {
                                         $icon.find('img');
                                     }

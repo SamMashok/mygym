@@ -10,8 +10,12 @@ class UserSubscriptionController extends Controller
 {
     public function store(StoreSubscriptionRequest $request, User $user)
     {
-        $user->subscriptions()->create($request->validated());
+        $subscription = $user->subscriptions()->create($request->validated());
 
-        return Response::api('Subscription successful.');
+        return Response::api([
+            'message' => 'Subscription created',
+            'data'    => compact('subscription'),
+        ]);
     }
+
 }

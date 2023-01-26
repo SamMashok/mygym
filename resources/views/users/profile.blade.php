@@ -176,8 +176,9 @@
                                             <p class="card-text">
                                                 This will delete the present profile photo and return to a default profile photo.
                                             </p>
-                                            <form action="{{ route('photos.destroy', $user) }}" method="POST" class="x-submit">
+                                            <form action="{{ route('photos.destroy', $user) }}" method="POST" class="">
                                                 @method('DELETE')
+                                                @csrf
                                                 <input type="hidden" name="deletePhoto" value="1">
                                                 <button type="submit" class="btn btn-danger rounded-0" onclick="return confirm('One last chance!\n\nAre you sure you want to delete User Photo?')">
                                                     Delete Photo

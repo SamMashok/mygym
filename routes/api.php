@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserSubscriptionController;
+use App\Http\Controllers\Api\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('users',                UserController::class)->only(['store', 'update', 'destroy']);
-    Route::resource('users.subscriptions',  UserSubscriptionController::class)->only('store');
+    Route::resource('users', UserController::class)->only(['store', 'update', 'destroy']);
+    Route::resource('users.subscriptions', UserSubscriptionController::class)->only('store');
+    Route::post('/subscriptions/{subscription}', [SubscriptionController::class, 'show'])->name('subscriptions.show');
 });

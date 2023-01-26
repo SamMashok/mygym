@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PaystackWebhookController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPhotoController;
@@ -46,6 +47,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout',  LogoutController::class)->name('logout');
 });
 
-
-
-
+Route::post('/paystack/hook', PaystackWebhookController::class);

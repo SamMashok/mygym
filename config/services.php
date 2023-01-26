@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'paystack' => [
+        'pk' => env('PS_PUBLIC_KEY'),
+        'sk' => env('PS_SECRET_KEY'),
+    ],
+
 ];

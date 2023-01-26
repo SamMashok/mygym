@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subscription;
-use Illuminate\Database\Eloquent\Builder;
 
 class SubscriptionController extends Controller
 {

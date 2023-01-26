@@ -54,7 +54,7 @@
                                     <form action="{{ route("api.users.destroy" , $user) }}" method="POST" class="x-submit" data-then="reload">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger rounded-pill">
+                                        <button type="submit" class="btn btn-danger rounded-pill" onclick="return confirm('One last chance!\n\nAre you sure you want to delete your Account?')">
                                             Delete
                                         </button>
                                     </form>

@@ -17,6 +17,10 @@
                                 <td>{{ $subscription->user->name }}</td>
                             </tr>
                             <tr>
+                                <th>Subscription Date</th>
+                                <td>{{ $subscription->date }}</td>
+                            </tr>
+                            <tr>
                                 <th>Amount paid</th>
                                 <td>1000</td>
                             </tr>
@@ -26,7 +30,11 @@
                             </tr>
                             <tr>
                                 <th>Payment Status</th>
-                                <td>Successful</td>
+                                @if($subscription->paid_at == null)
+                                    <td>Pending</td>
+                                @else
+                                    <td>Successful</td>
+                                @endif
                             </tr>
                         </table>
                     </div>

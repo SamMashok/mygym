@@ -62,7 +62,13 @@
                                             <small class="badge bg-warning ml-2 text-light">pending</small>
                                         </td>
                                         <td>
-                                            <small><a href="" class="btn btn-warning rounded-0 ml-5">Retry Payment</a></small>
+                                            <small>
+                                                <form action="{{ route("api.subscriptions.show", $subscription) }}" method="POST" class="x-submit" data-then="payWithPaystack" data-quietly="true">
+                                                    <button type="submit" class="btn btn-warning rounded-0 ml-5">
+                                                        Retry Payment
+                                                    </button>
+                                                </form>
+                                            </small>
                                         </td>
                                     @endpaid
                                 </tr>
@@ -83,8 +89,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Renew Subscription</h6>
                     </div>
                     <div class="card-body">
-                        <form class="container x-submit" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}" data-then="reload">
-                            @csrf
+                        <form class="container x-submit" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}" data-then="payWithPaystack" data-quietly="true">
                             <div class="mb-3">
                                 <label class="form-label h6" for="date">date</label>
                                 <input type="date" class="form-control" name="date" id="date" value="" required>
@@ -96,7 +101,7 @@
                                 </select>
                             </div>
                             <div class="mt-4">
-                                <button type="submit" class="btn btn-primary rounded-0">subscribe</button>
+                                <button type="submit" class="btn btn-primary rounded-0">Subscribe</button>
                             </div>
                         </form>
                     </div>
@@ -104,5 +109,57 @@
             </div>
         </div>
     @endsubscriptionRoute
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script>
+        function payWithPaystack({data}) {
+
+            let handler = PaystackPop.setup({
+                key: @js(config('services.paystack.pk')), // Replace with your public key
+                email: data.subscription.user.email,
+                amount: data.subscription.amount * 100,
+                ref: data.subscription.reference, // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                // label: "Optional string that replaces customer email"
+                label: data.subscription.user.email,
+                onClose: function(){
+                    swal({
+                        title: "Something went wrong.",
+                        icon: "warning",
+                        buttons: {
+                            tryAgain: {
+                                text: "Try Again",
+                                value: "try_again",
+                            },
+                            contactSupport: {
+                                text: "Cancel",
+                                value: "cancel",
+                            },
+                        },
+                        dangerMode: true,
+                    }).then((value) => {
+                        switch (value) {
+                            case "try_again":
+                                payWithPaystack({data});
+                                break;
+                            case "cancel":
+                                location.reload();
+                                break;
+                            default:
+                                location.reload();
+                        }
+                    });
+                },
+                callback: function(response){
+                    swal({
+                        title: "Subscription Successful.",
+                        icon: "success",
+                        buttons: "OK",
+                    });
+                    setTimeout(() => location.reload(), 3000);
+                }
+            });
+            handler.openIframe();
+        }
+    </script>
 </x-layout>
 
