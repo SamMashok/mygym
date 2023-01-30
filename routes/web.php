@@ -4,8 +4,10 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PaystackWebhookController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserPhotoController;
 use App\Http\Controllers\UserSubscriptionController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,8 +35,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::view('/dashboard', 'users.dashboard')->name('dashboard');
-
+    Route::get('/dashboard',                [HomeController::class, 'show'])->name('home');
     Route::resource('users',                UserController::class)->only(['index', 'show']);
     Route::resource('subscriptions',        SubscriptionController::class)->only(['index', 'show']);
     Route::resource('users.subscriptions',  UserSubscriptionController::class)->only('index');

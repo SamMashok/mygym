@@ -55,7 +55,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ route("dashboard") }}">
+            <a class="nav-link" href="{{ route("home") }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -361,7 +361,11 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; My Gym 2022</span>
+                    <span>Copyright &copy; My Gym  
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                    </span>
                 </div>
             </div>
         </footer>

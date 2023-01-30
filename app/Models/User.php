@@ -53,11 +53,6 @@ class User extends Authenticatable
         return Attribute::set(fn ($value) => bcrypt($value));
     }
 
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
-
     public function isAdmin()
     {
         return $this->type == 2;
@@ -81,6 +76,11 @@ class User extends Authenticatable
 
             return asset($value);
         });
+    }
+
+     public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
     }
 
 }

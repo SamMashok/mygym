@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class Subscription extends Model
 {
@@ -38,6 +39,17 @@ class Subscription extends Model
     public function scopePending(Builder $builder)
     {
         $builder->whereNull('paid_at');
+    }
+
+    public function scopeSuccessful(Builder $builder)
+    {
+        $builder->whereNotNull('paid_at');
+    }
+    
+    public function scopeThisMonth(Builder $builder)
+    {
+        $builder->whereMonth('date', Carbon::now()->month)
+                ->whereYear('date', Carbon::now()->year);
     }
 
     public function user()

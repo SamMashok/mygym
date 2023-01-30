@@ -22,7 +22,7 @@
                             </tr>
                             <tr>
                                 <th>Amount paid</th>
-                                <td>1000</td>
+                                <td>NGN1000</td>
                             </tr>
                             <tr>
                                 <th>Transaction ID</th>

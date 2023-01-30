@@ -3,14 +3,11 @@
     <h1 class="h3 mb-2 text-gray-800">Subscriptions</h1>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">All Subscriptions</h6>
-        </div>
-        <div class="card-body">
-            @if($subscriptions->isEmpty() && user()->isMember())
+        @if($subscriptions->isEmpty() && user()->isMember())
+            <div class="card-body">
                 <div class="text-center py-3">
                     <img src="{{ asset("img/sub.png") }}" width="150" alt="">
-                    <h4 class="mt-3">Ready to make your first Subscription, {{ $user->username }}?</h4>
+                    <h4 class="mt-3">Ready to make your first Subscription?</h4>
                      <br>
                     <p>Click button below to Subscribe.</p>
 
@@ -18,7 +15,12 @@
                         <a href="#date" class="btn btn-success">Subscribe</a>
                     </p>
                 </div>
-            @else
+            </div>    
+        @else
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">All Subscriptions</h6>
+            </div> 
+            <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -52,7 +54,7 @@
                                     <td>{{ $subscription->amount }}</td>
                                     @paid($subscription)
                                         <td>
-                                            <small class="badge bg-success ml-2 text-light">Fully Paid</small>
+                                            <small class="badge bg-success ml-2 text-light">Successful</small>
                                         </td>
                                         <td>
                                             <small><a href="{{ route('subscriptions.show', $subscription) }}" class="btn btn-primary rounded-0 ml-5">View Receipt</a></small>
@@ -76,8 +78,9 @@
                         </tbody>
                     </table>
                 </div>
-            @endif
-        </div>
+            </div>    
+        @endif
+       
     </div>
     @subscriptionRoute
         <div class="row">
@@ -86,7 +89,7 @@
                 <!-- Subscription Card -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Renew Subscription</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Subscribe here</h6>
                     </div>
                     <div class="card-body">
                         <form class="container x-submit" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}" data-then="payWithPaystack" data-quietly="true">
@@ -120,7 +123,7 @@
                 amount: data.subscription.amount * 100,
                 ref: data.subscription.reference, // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                 // label: "Optional string that replaces customer email"
-                label: data.subscription.user.email,
+    
                 onClose: function(){
                     swal({
                         title: "Something went wrong.",
