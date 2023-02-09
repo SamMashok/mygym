@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Date;
 
 class Subscription extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
 
     protected $with = ['user'];
@@ -45,11 +44,11 @@ class Subscription extends Model
     {
         $builder->whereNotNull('paid_at');
     }
-    
+
     public function scopeThisMonth(Builder $builder)
     {
-        $builder->whereMonth('date', Carbon::now()->month)
-                ->whereYear('date', Carbon::now()->year);
+        $builder->whereMonth('date', now()->month)
+                ->whereYear('date', now()->year);
     }
 
     public function user()
