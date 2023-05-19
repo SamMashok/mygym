@@ -41,12 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     public static function booted()
     {
         static::creating(function ($user) {
             $user->password ??= '2468';
         });
     }
+
     public function password(): Attribute
     {
         return Attribute::set(fn ($value) => bcrypt($value));
