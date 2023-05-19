@@ -26,26 +26,20 @@ use Illuminate\Support\Facades\Route;
 })->name('try');
 */
 
-
 Route::redirect('/', 'dashboard');
-
 Route::middleware('guest')->group(function () {
     Route::view('/login',       'auth.login')->name('login');
     Route::view('/register',    'auth.register')->name('register.create');
 });
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard',                [HomeController::class, 'show'])->name('home');
     Route::resource('users',                UserController::class)->only(['index', 'show']);
     Route::resource('subscriptions',        SubscriptionController::class)->only(['index', 'show']);
     Route::resource('users.subscriptions',  UserSubscriptionController::class)->only('index');
-
     Route::controller(UserPhotoController::class)->group(function () {
         Route::put('/photos/{user}', 'update')    ->name('photos.update');
         Route::delete('/photos/{user}', 'destroy')->name('photos.destroy');
     });
-
     Route::get('/logout',  LogoutController::class)->name('logout');
 });
-
 Route::post('/paystack/hook', PaystackWebhookController::class);
