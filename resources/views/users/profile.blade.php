@@ -1,10 +1,8 @@
-
 <x-layout>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Profile</h1>
     </div>
-
     <div class="mb-4">
         <div class="card bg-primary">
             <div class="card-body profile-user-box">
@@ -108,7 +106,6 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="gender">Gender</label>
                                                     <select class="form-control" name="gender" id="gender" required>
-                                                        <option></option>
                                                         <option value="M">male</option>
                                                         <option value="F">female</option>
                                                     </select>
@@ -209,23 +206,4 @@
             </div>
         </div>
     </div>
-
-<script>
-    $(document).ready(function() {
-        function showPasswordTab() {
-            $("#update-tab-pane").removeClass("show");
-            $("#update-tab-pane").removeClass("active");
-            $("#update-tab").removeClass("active");
-            $("#password-tab-pane").addClass("show");
-            $("#password-tab-pane").addClass("active");
-            $("#password-tab").addClass("active");
-        }
-        @error('password')
-            showPasswordTab();
-        @enderror
-    });
-
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
-</script>
 </x-layout>
