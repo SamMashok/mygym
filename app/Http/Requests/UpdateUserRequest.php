@@ -29,10 +29,12 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
+            'name'         => 'filled',
             'email'        => ['email', $unique = Rule::unique('users')->ignore($this->user)],
+            'gender'       => 'filled',
             'username'     => ['alpha_num', $unique],
-            'old_password' => ['current_password'],
-            'password'     => ['confirmed']
+            'old_password' => 'required_with:password|current_password',
+            'password'     => 'confirmed',
         ];
     }
 }
