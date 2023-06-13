@@ -20,8 +20,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        dd('clement');
-        return view('users.profile', compact('user'));
+        return view('users.show', compact('user'));
     }
 
 }
