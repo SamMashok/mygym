@@ -15,11 +15,11 @@
                         <a href="#date" class="btn btn-success">Subscribe</a>
                     </p>
                 </div>
-            </div>    
+            </div>
         @else
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">All Subscriptions</h6>
-            </div> 
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -78,9 +78,9 @@
                         </tbody>
                     </table>
                 </div>
-            </div>    
+            </div>
         @endif
-       
+
     </div>
     @subscriptionRoute
         <div class="row">
@@ -92,7 +92,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Subscribe here</h6>
                     </div>
                     <div class="card-body">
-                        <form class="container x-submit" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}" data-then="payWithPaystack" data-quietly="true">
+                        <form class="container x-submit" method="POST" action="{{ route('api.users.subscriptions.store', $user) }}" data-then="reload">
                             <div class="mb-3">
                                 <label class="form-label h6" for="date">date</label>
                                 <input type="date" class="form-control" name="date" id="date" value="" required>
@@ -123,7 +123,7 @@
                 amount: data.subscription.amount * 100,
                 ref: data.subscription.reference, // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                 // label: "Optional string that replaces customer email"
-    
+
                 onClose: function(){
                     swal({
                         title: "Something went wrong.",
