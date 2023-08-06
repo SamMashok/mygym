@@ -22,6 +22,7 @@ class Subscription extends Model
         static::creating(function ($subscription) {
             $subscription->reference ??= uniqid('mg');
             $subscription->amount    ??= 1000;
+            $subscription->paid_at   ??= now();
         });
     }
 
