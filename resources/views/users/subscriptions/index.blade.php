@@ -65,7 +65,7 @@
                                         </td>
                                         <td>
                                             <small>
-                                                <form action="{{ route("api.subscriptions.show", $subscription) }}" method="POST" class="x-submit" data-then="payWithPaystack" data-quietly="true">
+                                                <form action="{{ route("api.subscriptions.show", $subscription) }}" method="POST" class="x-submit" data-then="reload">
                                                     <button type="submit" class="btn btn-warning rounded-0 ml-5">
                                                         Retry Payment
                                                     </button>

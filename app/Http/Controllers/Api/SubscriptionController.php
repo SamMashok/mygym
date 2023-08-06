@@ -15,6 +15,7 @@ class SubscriptionController extends Controller
     public function show(Subscription $subscription)
     {
         return Response::api([
+            'message' => 'Subscription was Successful',
             'data'    => compact('subscription'),
         ]);
     }
