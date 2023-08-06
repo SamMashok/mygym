@@ -14,6 +14,8 @@ class SubscriptionController extends Controller
 
     public function show(Subscription $subscription)
     {
+        $subscription->update(['paid_at' => now()]);
+
         return Response::api([
             'message' => 'Subscription was Successful',
             'data'    => compact('subscription'),
