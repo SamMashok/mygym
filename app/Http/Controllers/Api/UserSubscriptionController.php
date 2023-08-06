@@ -13,7 +13,7 @@ class UserSubscriptionController extends Controller
         $subscription = $user->subscriptions()->create($request->validated());
 
         return Response::api([
-            'message' => 'Subscription created',
+            'message' => 'Subscription was Successful',
             'data'    => compact('subscription'),
         ]);
     }
