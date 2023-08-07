@@ -1,10 +1,6 @@
 <x-layout>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Users</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
-
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">All Users</h6>
@@ -66,7 +62,6 @@
             </div>
         </div>
     </div>
-
     <div id="modal-user-create" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-right col-md-6">
             <div class="modal-content p-3" style="min-width: 350px !important;">

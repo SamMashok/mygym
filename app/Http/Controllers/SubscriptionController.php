@@ -13,7 +13,9 @@ class SubscriptionController extends Controller
 
     public function index()
     {
-        return view('users.subscriptions.index', ['subscriptions' => Subscription::has('user')->get()]);
+        return view('users.subscriptions.index', [
+            'subscriptions' => Subscription::has('user')->latest('date')->get()
+        ]);
     }
 
     public function show(Subscription $subscription)
